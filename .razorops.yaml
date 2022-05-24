@@ -1,0 +1,11 @@
+tasks:
+  build-deps:
+    runner: cypress/base:8
+    steps:
+    - checkout
+    - cache/pull:
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+        - ./node_modules
+    - run: npm install
+    - run: npm run test
